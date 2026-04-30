@@ -1,0 +1,125 @@
+@layer knowledge-graph {
+	:root {
+		--kg-gap: 0.75rem;
+		--kg-root-height-offset: 8rem;
+		--kg-root-min-height: 31.25rem; /* 500px */
+
+		--kg-control-gap: 1rem;
+		--kg-legend-gap: 0.625rem; /* 10px */
+
+		/* typography */
+		--kg-font-xs: 0.65625rem; /* 10.5px */
+		--kg-font-sm: 0.71875rem; /* 11.5px */
+		--kg-font-md: 0.78125rem; /* 12.5px */
+		--kg-font-title: 0.84375rem; /* 13.5px */
+
+		/* radius */
+		--kg-radius-sm: 0.625rem;
+		--kg-radius-md: 1.25rem;
+		--kg-radius-lg: 0.5rem;
+
+		/* legend item */
+		--kg-leg-padding-y: 0.25em;
+		--kg-leg-padding-x: 0.7em;
+		--kg-leg-gap: 0.4em;
+
+		/* search */
+		--kg-search-padding-y: 0.4em;
+		--kg-search-padding-x: 0.8em;
+		--kg-search-icon-offset: 1.8em;
+		--kg-search-clear-size: 1em;
+
+		/* info card */
+		--kg-info-padding-y: 0.9rem;
+		--kg-info-padding-x: 1rem;
+		--kg-info-offset: 0.75rem;
+		--kg-info-width: 13.75rem; /* 220px */
+
+		/* tag */
+		--kg-tag-padding-y: 0.15em;
+		--kg-tag-padding-x: 0.6em;
+		--kg-tag-gap: 0.25rem;
+
+		/* related */
+		--kg-related-gap-y: 0.25em;
+		--kg-related-scroll-max: 10rem;
+
+		/* colors */
+		--kg-bg: rgb(255, 255, 255);
+		--kg-bg-muted: rgb(245, 245, 245);
+		--kg-fg: rgb(17, 17, 17);
+		--kg-fg-muted: rgb(119, 119, 119);
+		--kg-border: rgb(221, 221, 221);
+		--kg-ring: rgb(136, 136, 136);
+		--kg-link-hover: rgb(0, 122, 255);
+
+		/* canvas node colors — light */
+		--kg-node-default: rgb(136, 135, 128);
+		--kg-node-search-dim: rgb(216, 216, 216);
+		--kg-node-search-highlight: rgb(255, 102, 0);
+		--kg-node-hover-highlight: rgb(255, 51, 51);
+
+		/* custom node colors --kg-node-SECTION_NAME */
+		--kg-node-docs: rgb(55, 138, 221);
+		--kg-node-shortcodes: rgb(216, 90, 48);
+		--kg-node-posts: rgb(99, 153, 34);
+		--kg-node-blog: rgb(99, 153, 34);
+		--kg-node-reference: rgb(127, 119, 221);
+		--kg-node-tag: rgb(186, 117, 23);
+
+		/* canvas bg/fg/link */
+		--kg-canvas-bg: rgb(245, 245, 244);
+		--kg-canvas-fg: rgb(34, 34, 34);
+		--kg-link-normal: rgb(0, 0, 0);
+		--kg-link-normal-alpha: 0.1;
+		--kg-link-dim-alpha: 0.04;
+
+		/* effects */
+		--kg-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05);
+		--kg-blur: 0.5rem;
+	}
+
+	html[data-theme='dark'],
+	body[data-theme='dark'],
+	html[data-bs-theme='dark'],
+	html[data-scheme='dark'],
+	body[data-scheme='dark'],
+	html[data-color-mode='dark'],
+	body[data-color-mode='dark'],
+	body.dark,
+	body.dark-mode,
+	body.dark-theme,
+	body.theme-dark,
+	html.dark,
+	html.dark-mode,
+	html.dark-theme,
+	html.theme-dark,
+	[data-theme='dark'] {
+		--kg-bg: rgb(17, 17, 17);
+		--kg-bg-muted: rgb(33, 33, 33);
+		--kg-fg: rgb(255, 255, 255);
+		--kg-fg-muted: rgb(170, 170, 170);
+		--kg-border: rgb(51, 51, 51);
+		--kg-ring: rgb(119, 119, 119);
+		--kg-link-hover: rgb(0, 122, 255);
+
+		--kg-canvas-bg: rgb(26, 26, 26);
+		--kg-canvas-fg: rgb(255, 255, 255);
+		--kg-link-normal: rgb(255, 255, 255);
+		--kg-link-normal-alpha: 0.25;
+		--kg-link-dim-alpha: 0.04;
+
+		--kg-node-default: rgb(180, 178, 169);
+		--kg-node-search-dim: rgb(42, 42, 42);
+		--kg-node-search-highlight: rgb(255, 215, 0);
+		--kg-node-hover-highlight: rgb(255, 51, 51);
+
+		/* custom section colors */
+		--kg-node-docs: rgb(133, 183, 235);
+		--kg-node-shortcodes: rgb(240, 153, 123);
+		--kg-node-posts: rgb(151, 196, 89);
+		--kg-node-blog: rgb(151, 196, 89);
+		--kg-node-reference: rgb(175, 169, 236);
+		--kg-node-tag: rgb(250, 199, 117);
+	}
+}

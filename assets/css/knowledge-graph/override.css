@@ -1,0 +1,28 @@
+/* IMPORTANT: the colors only accept rgb format */
+:root {
+	/* Example: set colors for a new content type "travel" */
+	--kg-node-travel: rgb(133, 183, 235);
+
+	/* override background color */
+	/* --kg-bg: rgb(17, 17, 17); */
+}
+
+/* Dark mode: select your own dark mode selector */
+html[data-theme='dark'],
+body[data-theme='dark'],
+html[data-bs-theme='dark'],
+html[data-scheme='dark'],
+body[data-scheme='dark'],
+html[data-color-mode='dark'],
+body[data-color-mode='dark'],
+body.dark,
+body.dark-mode,
+body.dark-theme,
+body.theme-dark,
+html.dark,
+html.dark-mode,
+html.dark-theme,
+html.theme-dark,
+[data-theme='dark'] {
+	--kg-node-travel: rgb(133, 183, 235);
+}

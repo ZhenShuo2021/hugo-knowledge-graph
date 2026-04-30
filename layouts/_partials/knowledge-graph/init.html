@@ -1,0 +1,18 @@
+{{- define "_partials/inline/knowledge-graph/deep-merge.html" -}}
+	{{- $result := .base -}}
+	{{- range $k, $v := .override -}}
+		{{- $base := index $result $k -}}
+		{{- if and (reflect.IsMap $v) (reflect.IsMap $base) -}}
+			{{- $child := partial "inline/knowledge-graph/deep-merge.html" (dict "base" $base "override" $v) -}}
+			{{- $result = merge $result (dict $k $child) -}}
+		{{- else -}}
+			{{- $result = merge $result (dict $k $v) -}}
+		{{- end -}}
+	{{- end -}}
+	{{- return $result -}}
+{{- end -}}
+
+{{- $defaults := hugo.Data.knowledgeGraphDefault | default dict -}}
+{{- $user := hugo.Data.knowledgeGraph | default dict -}}
+{{- $merged := partial "inline/knowledge-graph/deep-merge.html" (dict "base" $defaults "override" $user) -}}
+{{- site.Store.Set "knowledge-graph-config" $merged -}}

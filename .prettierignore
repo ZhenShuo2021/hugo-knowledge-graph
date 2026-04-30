@@ -1,0 +1,15 @@
+# develop
+.vscode
+.rumdl
+.markdownlint-cli2.yaml
+node_modules
+pnpm-lock.yaml
+
+# Hugo
+assets/lib
+assets/css/compiled
+content
+themes
+public
+static
+*.md

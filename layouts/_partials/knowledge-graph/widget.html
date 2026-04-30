@@ -1,0 +1,32 @@
+{{- if in (slice "section" "taxonomy" "term") .Kind -}}
+	{{- warnf "knowledge-graph/widget.html is not supported in %s page" .Kind -}}
+	{{- return -}}
+{{- end -}}
+{{- partialCached "knowledge-graph/init.html" "foo" -}}
+{{- $g := site.Store.Get "knowledge-graph-config" -}}
+{{- $css := slice -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/vars.css") -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/full.css") -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/widget.css") -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/override.css") -}}
+{{- $bundle := $css | resources.Concat "css/knowledge-graph/widget-bundle.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+
+<div
+	id="kgw-root"
+	class="kg-widget"
+	data-url="{{ .Site.Home.RelPermalink }}"
+	data-focal="{{ .RelPermalink }}"
+	data-related-label="{{ i18n `kg.related_articles` }}">
+	<div id="kgw-wrap"></div>
+</div>
+
+{{- $forceGraphSrc := $g.forceGraphSrc | default "https://cdn.jsdelivr.net/npm/force-graph" -}}
+<script
+	defer
+	src="{{ $forceGraphSrc }}"
+	{{ with $g.forceGraphSri }}integrity="{{ . }}"{{ end }}
+	crossorigin="anonymous"></script>
+{{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g -}}
+{{- $js := resources.Get "/js/knowledge-graph/main.js" | js.Build $opts | fingerprint -}}
+<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

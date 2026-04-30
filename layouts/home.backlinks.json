@@ -1,0 +1,1 @@
+{{- range site.RegularPages -}}{{- $noop := .Len -}}{{- end -}}

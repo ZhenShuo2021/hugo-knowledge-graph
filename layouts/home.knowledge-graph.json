@@ -1,0 +1,84 @@
+{{- $backlinks := .Store.Get "backlinks" -}}
+{{- $pages := where site.RegularPages "Params.pageNoList" "!=" true -}}
+
+{{- print `{"edges":[` -}}
+
+{{- $first := true -}}
+{{- with $backlinks -}}
+	{{- range . -}}
+		{{- $src := .source.relPermalink -}}
+		{{- $tgt := .target -}}
+		{{- if and $src $tgt -}}
+			{{- if $first -}}{{- $first = false -}}{{- else -}},{{- end -}}
+			{{- dict "source" $src "target" $tgt "type" "link" | jsonify -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+
+{{- range $name, $taxonomy := site.Taxonomies.tags -}}
+	{{- $count := len $taxonomy -}}
+	{{- if and (gt $count 1) (le $count 15) -}}
+		{{- $tagId := printf "/tags/%s/" ($name | anchorize) -}}
+		{{- range $taxonomy -}}
+			{{- if not .Page.Params.pageNoList -}}
+				{{- if $first -}}{{- $first = false -}}{{- else -}},{{- end -}}
+				{{- dict "source" .Page.RelPermalink "target" $tagId "type" "tag" | jsonify -}}
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}
+
+{{- print `],"nodes":[` -}}
+
+{{- $validGroups := index hugo.Data.knowledgeGraph "groups" | default slice -}}
+
+{{- $first = true -}}
+{{- range $pages -}}
+	{{- if $first -}}{{- $first = false -}}{{- else -}},{{- end -}}
+	{{- $itemGroup := "" -}}
+	{{- if $validGroups -}}
+		{{- $pagePath := strings.TrimPrefix "/" .Path -}}
+		{{- range $g := $validGroups -}}
+			{{- if hasPrefix $pagePath (printf "%s/" ($g.path | default "")) -}}
+				{{- $itemGroup = $g.name | default "" -}}
+				{{- break -}}
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+
+	{{- if eq $itemGroup "" -}}
+		{{- $itemGroup = .Section -}}
+	{{- end -}}
+
+	{{- dict
+		"id"      .RelPermalink
+		"title"   .Title
+		"url"     .RelPermalink
+		"section" .Section
+		"group"   $itemGroup
+		"tags"    (.Params.tags | default slice)
+		"words"   .WordCount
+		"date"    (.Date.Format "2006-01-02")
+		| jsonify
+	-}}
+{{- end -}}
+
+{{- range $name, $taxonomy := site.Taxonomies.tags -}}
+	{{- $count := len $taxonomy -}}
+	{{- if and (gt $count 1) (le $count 15) -}}
+		{{- if $first -}}{{- $first = false -}}{{- else -}},{{- end -}}
+		{{- dict
+			"id"      (printf "/tags/%s/" ($name | anchorize))
+			"title"   $name
+			"url"     (printf "/tags/%s/" ($name | anchorize))
+			"section" "tag"
+			"tags"    slice
+			"words"   0
+			"count"   $count
+			| jsonify
+		-}}
+	{{- end -}}
+{{- end -}}
+
+{{- print `]}` -}}
+{{- site.Store.Set "knowledge-graph-hash" now.UnixNano -}}

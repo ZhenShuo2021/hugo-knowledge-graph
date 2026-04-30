@@ -1,0 +1,66 @@
+# rumdl configuration file
+# Last updated: 0.1.74 (from 0.1.18)
+
+# Global configuration options
+[global]
+    # List of rules to disable
+    disable = [
+        # "MD002", # First header should be a h1 header
+        "MD003", # Heading style - conflict with mermaid syntax
+        "MD004", # List marker '+' does not match expected style, conflict LaTeX
+        "MD013", # Line length
+        "MD025", # Multiple top level headers
+        "MD026", # Trailing punctuation in header
+        "MD028", # Blank line inside blockquote
+        "MD029", # Ordered list item prefix
+        "MD031", # Code blocks should be surrounded by blank lines
+        "MD032", # List marker '+' does not match expected style, conflict LaTeX
+        "MD033", # Inline HTML
+        "MD034", # Bare URL used
+        "MD036", # Emphasis used instead of a header
+        "MD041", # First line in file should be a top level header
+        "MD046", # Code block style
+        "MD059", # Link text should be descriptive
+        "MD060", # Table column style
+    ]
+
+    # Opt-in rules (disabled by default): MD060, MD063, MD070, MD072, MD073, MD074
+    # extend-enable = ["MD060", "MD063", "MD072", "MD073", "MD074"]
+
+    # Rules that survive CLI --disable overrides
+    # extend-disable = []
+
+    # List of file/directory patterns to exclude from linting
+    exclude = [
+        # Common directories to exclude
+        ".git",
+        ".github",
+        "node_modules",
+        "vendor",
+        "dist",
+        "build",
+        "themes",
+
+        # Specific files or patterns
+        "CHANGELOG.md",
+        "LICENSE.md",
+    ]
+
+    # Respect .gitignore files when scanning directories (default: true)
+    respect-gitignore = true
+
+    # Markdown flavor/dialect
+    # Options: standard (default), gfm, commonmark, mkdocs, kramdown, jekyll, mdx, quarto
+    flavor = "gfm"
+
+[MD004]
+    style = "dash" # Unordered list style
+
+[MD024]
+    siblings-only = true # Multiple headers with the same content
+
+[MD049]
+    style = "asterisk" # Emphasis style
+
+[MD050]
+    style = "asterisk" # Strong style

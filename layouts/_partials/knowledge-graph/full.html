@@ -1,0 +1,55 @@
+{{- partialCached "knowledge-graph/init.html" "foo" -}}
+{{- $g := site.Store.Get "knowledge-graph-config" -}}
+{{- $css := slice -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/vars.css") -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/full.css") -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/override.css") -}}
+{{- $bundle := $css | resources.Concat "css/main.bundle.css" | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+
+{{- $hash := site.Store.Get "knowledge-graph-hash" -}}
+<div
+	id="kg-root"
+	class="kg-root"
+	data-url="{{ .Site.Home.RelPermalink }}"
+	data-hash="{{ $hash }}"
+	data-related-label="{{ i18n `kg.related_articles` }}">
+	<div id="kg-controls">
+		{{- if (eq $g.full.fixedLayout "") -}}
+			<div id="kg-layout-switcher">
+				<button data-layout="uniform">Uniform</button>
+				<button data-layout="layered">Layered</button>
+				<button data-layout="organic">Organic</button>
+			</div>
+		{{- end -}}
+		<div id="kg-legend" class="kg-legend"></div>
+		<div id="kg-search-wrap">
+			<input type="text" id="kg-search" placeholder="Search…" autocomplete="off">
+			<button id="kg-search-clear" aria-label="Clear search">✕</button>
+		</div>
+	</div>
+	<div style="width:100%; position:relative; flex:1; min-height:0;">
+		<div id="kg-wrap" style="height:100%;"></div>
+		<div id="kg-info">
+			<div class="ki-title" id="ki-title"></div>
+			<div class="ki-meta" id="ki-meta"></div>
+			<div class="ki-tags" id="ki-tags"></div>
+			<div id="ki-related"></div>
+		</div>
+	</div>
+</div>
+
+{{- $forceGraphSrc := $g.forceGraphSrc | default "https://cdn.jsdelivr.net/npm/force-graph" -}}
+<script
+	defer
+	src="{{ $forceGraphSrc }}"
+	{{ with $g.forceGraphSri }}integrity="{{ . }}"{{ end }}
+	crossorigin="anonymous"></script>
+{{- /* Read from data directory because:
+	1. hugo.yaml triggers a full site rebuild
+	2. hugo lowercases all config keys
+	3. see https://discourse.gohugo.io/t/56922/13 and https://discourse.gohugo.io/t/15828/3
+*/}}
+{{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g -}}
+{{- $js := resources.Get "/js/knowledge-graph/main.js" | js.Build $opts | fingerprint -}}
+<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

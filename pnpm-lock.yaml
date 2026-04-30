@@ -1,0 +1,210 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@awmottaz/prettier-plugin-void-html':
+        specifier: ^2.1.0
+        version: 2.1.0(prettier@3.7.4)
+      prettier:
+        specifier: ~3.7.4
+        version: 3.7.4
+      prettier-plugin-go-template:
+        specifier: ^0.0.15
+        version: 0.0.15(prettier@3.7.4)
+      prettier-plugin-tailwindcss:
+        specifier: ^0.7.2
+        version: 0.7.2(prettier@3.7.4)
+      rumdl:
+        specifier: ^0.1.74
+        version: 0.1.80
+    devDependencies:
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
+
+packages:
+
+  '@awmottaz/prettier-plugin-void-html@2.1.0':
+    resolution: {integrity: sha512-csoLknjo0lcqkhlsp3qg0jLSmQnow1sLwJTt3oAQmUyIbBtIXVUX1TBk+ay6HvphsUtkWGW8lyAcr/3I4gRJQQ==}
+    peerDependencies:
+      prettier: 3.0.0 - 3.8.x
+
+  '@rumdl/cli-darwin-arm64@0.1.80':
+    resolution: {integrity: sha512-Fk/bt18WKUsdn23OEVGhNWyu9B2ZbSYrAXWildihF4SRB2xFbWsNnGqI8tJkXWivh19Jghe0uvpgDMasOEU8mQ==}
+    engines: {node: '>=18.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@rumdl/cli-darwin-x64@0.1.80':
+    resolution: {integrity: sha512-oAyUMED/GkNF0yUvSdALLTEMysVqbTVBQX8ops7F3npFjpTovwPEGXzmTD7F9szkVGyRwcDURVHasnO6faVjLg==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rumdl/cli-linux-arm64-musl@0.1.80':
+    resolution: {integrity: sha512-xkfBwraIDL+fhmaMbeth10R9nuujgnzHOqBGwImM+rXYScJO/oh11ziWIXPKoUUTiQGcH/mf5pnvFtwF8dL+kg==}
+    engines: {node: '>=18.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rumdl/cli-linux-arm64@0.1.80':
+    resolution: {integrity: sha512-hvxhCN6+tiR6/8AH3oDaFL7XSRp88+brcyPEWRukP2fYBYufCCF6Um9B/ghN/Gn42KSosDV22z4+2JWyh0TZ7Q==}
+    engines: {node: '>=18.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rumdl/cli-linux-x64-musl@0.1.80':
+    resolution: {integrity: sha512-k/rmIj95M9xjPXti+EQVrJukS8dvVCBpH6ch8paxBROVfViF35rfDreQxdo7PdKcslzpuG14xi1dnEGzp5Fj6w==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@rumdl/cli-linux-x64@0.1.80':
+    resolution: {integrity: sha512-5wrD5tA9ucu3ZvSzGle5sN3Gsy2Z5+h7FmGmAfbyG979XkC3YNUlOv2AzpS+BIQPIMNe7qsy+ZZF3xmcNfv9Og==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@rumdl/cli-win32-x64@0.1.80':
+    resolution: {integrity: sha512-oBRGooTYGuo5PJGRaNIkC0GdQZFRfxIjCwQxh7pUxoV1NgvPnh0TUlTejzbYWFiY3EWBViPELDJSbveETn/xZw==}
+    engines: {node: '>=18.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  prettier-plugin-go-template@0.0.15:
+    resolution: {integrity: sha512-WqU92E1NokWYNZ9mLE6ijoRg6LtIGdLMePt2C7UBDjXeDH9okcRI3zRqtnWR4s5AloiqyvZ66jNBAa9tmRY5EQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      prettier: ^3.0.0
+
+  prettier-plugin-tailwindcss@0.7.2:
+    resolution: {integrity: sha512-LkphyK3Fw+q2HdMOoiEHWf93fNtYJwfamoKPl7UwtjFQdei/iIBoX11G6j706FzN3ymX9mPVi97qIY8328vdnA==}
+    engines: {node: '>=20.19'}
+    peerDependencies:
+      '@ianvs/prettier-plugin-sort-imports': '*'
+      '@prettier/plugin-hermes': '*'
+      '@prettier/plugin-oxc': '*'
+      '@prettier/plugin-pug': '*'
+      '@shopify/prettier-plugin-liquid': '*'
+      '@trivago/prettier-plugin-sort-imports': '*'
+      '@zackad/prettier-plugin-twig': '*'
+      prettier: ^3.0
+      prettier-plugin-astro: '*'
+      prettier-plugin-css-order: '*'
+      prettier-plugin-jsdoc: '*'
+      prettier-plugin-marko: '*'
+      prettier-plugin-multiline-arrays: '*'
+      prettier-plugin-organize-attributes: '*'
+      prettier-plugin-organize-imports: '*'
+      prettier-plugin-sort-imports: '*'
+      prettier-plugin-svelte: '*'
+    peerDependenciesMeta:
+      '@ianvs/prettier-plugin-sort-imports':
+        optional: true
+      '@prettier/plugin-hermes':
+        optional: true
+      '@prettier/plugin-oxc':
+        optional: true
+      '@prettier/plugin-pug':
+        optional: true
+      '@shopify/prettier-plugin-liquid':
+        optional: true
+      '@trivago/prettier-plugin-sort-imports':
+        optional: true
+      '@zackad/prettier-plugin-twig':
+        optional: true
+      prettier-plugin-astro:
+        optional: true
+      prettier-plugin-css-order:
+        optional: true
+      prettier-plugin-jsdoc:
+        optional: true
+      prettier-plugin-marko:
+        optional: true
+      prettier-plugin-multiline-arrays:
+        optional: true
+      prettier-plugin-organize-attributes:
+        optional: true
+      prettier-plugin-organize-imports:
+        optional: true
+      prettier-plugin-sort-imports:
+        optional: true
+      prettier-plugin-svelte:
+        optional: true
+
+  prettier@3.7.4:
+    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  rumdl@0.1.80:
+    resolution: {integrity: sha512-Kri+BvAeAOMARRfk4UJ3inlmdUnHI8G+dX5OsO89/5eC7UgnvDz/7b3VbtMiQHkEv3b5ESwcZCom+4id2BIdzg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
+  ulid@2.4.0:
+    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+    hasBin: true
+
+snapshots:
+
+  '@awmottaz/prettier-plugin-void-html@2.1.0(prettier@3.7.4)':
+    dependencies:
+      prettier: 3.7.4
+
+  '@rumdl/cli-darwin-arm64@0.1.80':
+    optional: true
+
+  '@rumdl/cli-darwin-x64@0.1.80':
+    optional: true
+
+  '@rumdl/cli-linux-arm64-musl@0.1.80':
+    optional: true
+
+  '@rumdl/cli-linux-arm64@0.1.80':
+    optional: true
+
+  '@rumdl/cli-linux-x64-musl@0.1.80':
+    optional: true
+
+  '@rumdl/cli-linux-x64@0.1.80':
+    optional: true
+
+  '@rumdl/cli-win32-x64@0.1.80':
+    optional: true
+
+  husky@9.1.7: {}
+
+  prettier-plugin-go-template@0.0.15(prettier@3.7.4):
+    dependencies:
+      prettier: 3.7.4
+      ulid: 2.4.0
+
+  prettier-plugin-tailwindcss@0.7.2(prettier@3.7.4):
+    dependencies:
+      prettier: 3.7.4
+
+  prettier@3.7.4: {}
+
+  rumdl@0.1.80:
+    optionalDependencies:
+      '@rumdl/cli-darwin-arm64': 0.1.80
+      '@rumdl/cli-darwin-x64': 0.1.80
+      '@rumdl/cli-linux-arm64': 0.1.80
+      '@rumdl/cli-linux-arm64-musl': 0.1.80
+      '@rumdl/cli-linux-x64': 0.1.80
+      '@rumdl/cli-linux-x64-musl': 0.1.80
+      '@rumdl/cli-win32-x64': 0.1.80
+
+  ulid@2.4.0: {}

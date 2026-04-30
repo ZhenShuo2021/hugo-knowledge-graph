@@ -1,0 +1,61 @@
+# ==========================================
+# External Resources
+# ==========================================
+forceGraphSrc: https://cdn.jsdelivr.net/npm/force-graph@1.51.4/dist/force-graph.min.js
+forceGraphSri: sha256-EAhTm7nhcaDcNDRTNmRRobOm3tBgKO9Pl4YItli6LQo=
+d3ForceSrc: https://esm.sh/d3-force # Must be ESM format
+
+# ==========================================
+# Global Environment
+# ==========================================
+darkSelectors: '' # CSS selector to observe dark mode (used when no event is dispatched)
+
+# ==========================================
+# Mode-Specific Configs
+# ==========================================
+
+# 1. Full Graph Mode
+full:
+  nodeRelSize: 12 # Base radius unit for nodes
+  nodeValMin: 4 # Minimum physical/visual node size
+  nodeValMax: 128 # Maximum physical/visual node size
+  nodeValDegScale: 1.5 # Weight for scaling node size by link degree
+  labelZoomThreshold: 0.2 # Zoom level at which labels start appearing (lower = earlier)
+  labelFontScale: 0.12 # Label text scale factor
+  labelFontMin: 30 # Minimum label font size in pixels
+  labelMaxChars: 99 # Maximum characters shown in a node label
+  labelFadeRate: 0.1 # Label fade-in animation rate
+  labelOffsetPx: 2 # Vertical gap between label and node (px)
+  chargeStrength: -3000 # D3 many-body force strength (negative = repulsion) https://d3js.org/d3-force/many-body#manyBody_strength
+  linkDistance: 300 # Ideal distance between linked nodes https://d3js.org/d3-force/link#link_distance
+  graphZoomInit: 0.08 # Initial zoom level when the canvas loads
+  showTags: true # Whether to show tag nodes
+  tagMinCount: 2 # Minimum number of articles a tag must be linked to in order to appear
+  animSpeed: 0.1 # Rate for color transitions and other animations
+
+  # full only
+  fixedLayout: '' # Static layout algorithm (options: uniform, layered, organic)
+  searchZoomDest: 0.6 # Zoom level after focusing on a search result
+  searchZoomDur: 1000 # Duration of search focus animation (ms)
+
+# 2. Widget / Local Graph Mode
+widget:
+  nodeRelSize: 3
+  nodeValMin: 2
+  nodeValMax: 16
+  nodeValDegScale: 1.5
+  labelZoomThreshold: 0.005
+  labelFontScale: 1
+  labelFontMin: 10
+  labelMaxChars: 99
+  labelFadeRate: 0.1
+  labelOffsetPx: 2
+  chargeStrength: -3000
+  linkDistance: 10
+  graphZoomInit: 0.7
+  showTags: true
+  tagMinCount: 0
+  animSpeed: 0.1
+
+  # widget only
+  hopDepth: 1 # How many hops outward to include in the local graph view

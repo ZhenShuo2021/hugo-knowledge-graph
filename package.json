@@ -1,0 +1,36 @@
+{
+	"name": "hugo-knowledge-graph",
+	"type": "module",
+	"version": "0.0.1",
+	"description": "Article knowledge for Hugo.",
+	"keywords": [
+		"hugo",
+		"tailwind",
+		"dark-mode"
+	],
+	"homepage": "https://github.com/ZhenShuo2021/hugo-yore#readme",
+	"bugs": {
+		"url": "https://github.com/ZhenShuo2021/hugo-yore/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ZhenShuo2021/hugo-yore.git"
+	},
+	"license": "MIT",
+	"scripts": {
+		"dev": "hugo server --source ../hugo-kg-example --themesDir ..",
+		"format": "prettier --write --list-different assets data i18n layouts scripts",
+		"format:md": "rumdl fmt --include \"**/*.md\"",
+		"prepare": "husky"
+	},
+	"dependencies": {
+		"@awmottaz/prettier-plugin-void-html": "^2.1.0",
+		"prettier": "~3.7.4",
+		"prettier-plugin-go-template": "^0.0.15",
+		"prettier-plugin-tailwindcss": "^0.7.2",
+		"rumdl": "^0.1.74"
+	},
+	"devDependencies": {
+		"husky": "^9.1.7"
+	}
+}

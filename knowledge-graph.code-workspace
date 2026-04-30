@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": ".",
+		},
+		{
+			"name": "hugo-kg-example",
+			"path": "../hugo-kg-example",
+		},
+	],
+	"settings": {
+		"files.associations": {
+			"home.*.json": "html",
+			"render-link.backlinks.json": "html",
+			"*.html": "html",
+		},
+	},
+}
