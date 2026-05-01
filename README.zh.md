@@ -79,8 +79,6 @@ HKG 提供兩種使用方式，分別是全功能的 `full` 和小組件類型�
 
 所有可自定義的顏色都在 [vars.css][css] 中，你可以在您主題的 `custom.css` 中自定義變數值，或是使用本專案自行提供的入口檔案 `assets/css/knowledge-graph/override.css`。
 
-[css]: https://github.com/ZhenShuo2021/hugo-knowledge-graph/blob/main/assets/css/vars.css
-
 節點顏色遵循 `--kg-node-GROUP_NAME` 命名規則，group 名稱預設對應 Hugo 的 content section，例如 `content/posts/` 的節點顏色變數是 `--kg-node-posts`。你可以用這個方式替任意 group 指定顏色，不限於內建的幾個：
 
 ```css
@@ -240,6 +238,7 @@ HKG 支援 dark mode，如果你的網站沒有在支援的覆蓋範圍，可以
 4. `hugo server --source ../hugo-kg-example --themesDir .. -e docker`
 
 [fg]: https://github.com/vasturiano/force-graph
+[css]: https://github.com/ZhenShuo2021/hugo-knowledge-graph/blob/main/assets/css/knowledge-graph/vars.css
 [getpage]: https://gohugo.io/methods/page/getpage/
 [md-abs-path]: https://marketplace.visualstudio.com/items?itemName=ZhenShuo2021.markdown-absolute-path
 [md057]: https://rumdl.dev/md057/?h=md057#absolute-links

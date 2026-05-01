@@ -79,8 +79,6 @@ If you want to load HKG as a page widget, use `{{ partial "knowledge-graph/widge
 
 All customizable colors are defined in [vars.css][css]. You can override variable values in your theme’s `custom.css`, or use the provided entry file `assets/css/knowledge-graph/override.css`.
 
-[css]: https://github.com/ZhenShuo2021/hugo-knowledge-graph/blob/main/assets/css/vars.css
-
 Node colors follow the naming rule `--kg-node-GROUP_NAME`. Group names default to Hugo content sections. For example, nodes under `content/posts/` use the variable `--kg-node-posts`. You can define colors for any group using this pattern, not limited to built-in ones:
 
 ```css
@@ -241,6 +239,7 @@ Switching to `always` will override your original theme’s link render hook (if
 4. `hugo server --source ../hugo-kg-example --themesDir .. -e docker`
 
 [fg]: https://github.com/vasturiano/force-graph
+[css]: https://github.com/ZhenShuo2021/hugo-knowledge-graph/blob/main/assets/css/knowledge-graph/vars.css
 [getpage]: https://gohugo.io/methods/page/getpage/
 [md-abs-path]: https://marketplace.visualstudio.com/items?itemName=ZhenShuo2021.markdown-absolute-path
 [md057]: https://rumdl.dev/md057/?h=md057#absolute-links
