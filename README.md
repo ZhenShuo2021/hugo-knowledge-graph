@@ -24,47 +24,46 @@ Install HKG using either git submodule or Hugo module.
 
 ### Installation & Configuration
 
-**git submodule**
+<details>
+<summary>git submodule</summary>
 
 ```bash
 git submodule add https://github.com/ZhenShuo2021/hugo-knowledge-graph themes/hugo-knowledge-graph
 ```
 
-**Hugo module**
+Configure `hugo.toml`:
 
-Configure `hugo.yaml`
+```toml
+theme = ["hugo-knowledge-graph", "your original theme"]
 
-```yaml
-module:
-  imports:
-    - path: github.com/ZhenShuo2021/hugo-knowledge-graph
+[markup.goldmark.renderHooks.link]
+useEmbedded = "always"
+
+[outputs]
+  home = ["html", "backlinks", "knowledge-graph"]
 ```
 
-Or `hugo.toml`
+</details>
+
+<details>
+<summary>Hugo module</summary>
+
+Make sure your project already uses Hugo modules. If not, run `hugo mod init NAME` first.
+
+Configure `hugo.toml`:
 
 ```toml
 [[module.imports]]
   path = "github.com/ZhenShuo2021/hugo-knowledge-graph"
+
+[markup.goldmark.renderHooks.link]
+  useEmbedded = "always"
+
+[outputs]
+  home = ["html", "backlinks", "knowledge-graph"]
 ```
 
-After installation, configure custom outputs and link renderHooks:
-
-```yaml
-# Uncomment this line if installed via git submodule
-# theme: ["hugo-knowledge-graph", "your original theme"]
-
-markup:
-  goldmark:
-    renderHooks:
-      link:
-        useEmbedded: always
-
-outputs:
-  home:
-    - html
-    - backlinks
-    - knowledge-graph
-```
+</details>
 
 ### Usage
 

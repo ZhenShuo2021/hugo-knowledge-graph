@@ -22,49 +22,48 @@ Hugo Knowledge Graph (HKG) 是一個 Hugo module，用來視覺化部落格文�
 
 git submodule 或是 Hugo module 兩種方式擇一安裝 HKG。
 
-### Installation & Configuration
+### 安裝與設定
 
-**git submodule**
+<details>
+<summary>git submodule</summary>
 
 ```bash
 git submodule add https://github.com/ZhenShuo2021/hugo-knowledge-graph themes/hugo-knowledge-graph
 ```
 
-**Hugo module**
+設定 `hugo.toml`：
 
-設定 `hugo.yaml`
+```toml
+theme = ["hugo-knowledge-graph", "your original theme"]
 
-```yaml
-module:
-  imports:
-    - path: github.com/ZhenShuo2021/hugo-knowledge-graph
+[markup.goldmark.renderHooks.link]
+  useEmbedded = "always"
+
+[outputs]
+  home = ["html", "backlinks", "knowledge-graph"]
 ```
 
-或是 `hugo.toml`
+</details>
+
+<details>
+<summary>Hugo module</summary>
+
+請確認你的專案已啟用 Hugo module，若尚未啟用，請先執行 `hugo mod init NAME`。
+
+設定 `hugo.toml`：
 
 ```toml
 [[module.imports]]
   path = "github.com/ZhenShuo2021/hugo-knowledge-graph"
+
+[markup.goldmark.renderHooks.link]
+  useEmbedded = "always"
+
+[outputs]
+  home = ["html", "backlinks", "knowledge-graph"]
 ```
 
-完成安裝後設定 custom outputs 和 link renderHooks:
-
-```yaml
-# 使用 git submodule 安裝需要 uncomment 此行
-# theme: ["hugo-knowledge-graph", "your original theme"]
-
-markup:
-  goldmark:
-    renderHooks:
-      link:
-        useEmbedded: always
-
-outputs:
-  home:
-    - html
-    - backlinks
-    - knowledge-graph
-```
+</details>
 
 ### Usage
 
