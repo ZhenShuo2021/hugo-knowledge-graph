@@ -4,8 +4,9 @@ Visualize the relational links between your blog posts!
 
 Hugo Knowledge Graph (HKG) is a Hugo module for visualizing the link relationships between blog posts.
 
-![Example rendered using docker docs](/example-docker.webp)
-![Example rendered using docker docs - legend on](/example-docker-legend.webp)
+| Example rendered using docker docs | Legend on |
+| --- | --- |
+| <img width="780" height="780" alt="docker" src="https://github.com/user-attachments/assets/e6848a50-0a2d-4e50-8212-db9bf6aaf95c" /> | <img width="786" height="784" alt="docker-lgd" src="https://github.com/user-attachments/assets/de75d71e-4b21-4bb6-b5fc-7ae84aaf8b93" /> |
 
 ## How it Works
 
