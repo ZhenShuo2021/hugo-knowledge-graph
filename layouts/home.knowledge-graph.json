@@ -1,5 +1,7 @@
 {{- $backlinks := .Store.Get "backlinks" -}}
 {{- $pages := where site.RegularPages "Params.pageNoList" "!=" true -}}
+{{- $totalPages := float (len $pages) | default 1.0 -}}
+{{- $threshold := 0.20 }}
 
 {{- print `{"edges":[` -}}
 
@@ -17,7 +19,11 @@
 
 {{- range $name, $taxonomy := site.Taxonomies.tags -}}
 	{{- $count := len $taxonomy -}}
-	{{- if and (gt $count 1) (le $count 15) -}}
+	{{- $ratio := 0.0 -}}
+	{{- if gt $totalPages 0 -}}
+		{{- $ratio = div (float $count) $totalPages -}}
+	{{- end -}}
+	{{- if and (gt $count 1) (lt $ratio $threshold) -}}
 		{{- $tagId := printf "/tags/%s/" ($name | anchorize) -}}
 		{{- range $taxonomy -}}
 			{{- if not .Page.Params.pageNoList -}}
@@ -65,7 +71,11 @@
 
 {{- range $name, $taxonomy := site.Taxonomies.tags -}}
 	{{- $count := len $taxonomy -}}
-	{{- if and (gt $count 1) (le $count 15) -}}
+	{{- $ratio := 0.0 -}}
+	{{- if gt $totalPages 0 -}}
+		{{- $ratio = div (float $count) $totalPages -}}
+	{{- end -}}
+	{{- if and (gt $count 1) (lt $ratio $threshold) -}}
 		{{- if $first -}}{{- $first = false -}}{{- else -}},{{- end -}}
 		{{- dict
 			"id"      (printf "/tags/%s/" ($name | anchorize))
