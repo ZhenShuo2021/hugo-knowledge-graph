@@ -4,13 +4,16 @@
 {{- end -}}
 {{- partialCached "knowledge-graph/init.html" "foo" -}}
 {{- $g := site.Store.Get "knowledge-graph-config" -}}
-{{- $css := slice -}}
-{{- $css = $css | append (resources.Get "css/knowledge-graph/vars.css") -}}
-{{- $css = $css | append (resources.Get "css/knowledge-graph/full.css") -}}
-{{- $css = $css | append (resources.Get "css/knowledge-graph/widget.css") -}}
-{{- $css = $css | append (resources.Get "css/knowledge-graph/override.css") -}}
-{{- $bundle := $css | resources.Concat "css/knowledge-graph/widget-bundle.css" | minify | fingerprint -}}
-<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+{{- if not site.Params.__hkg_CSSLoaded -}}
+	{{- $css := slice -}}
+	{{- $css = $css | append (resources.Get "css/knowledge-graph/vars.css") -}}
+	{{- $css = $css | append (resources.Get "css/knowledge-graph/full.css") -}}
+	{{- $css = $css | append (resources.Get "css/knowledge-graph/widget.css") -}}
+	{{- $css = $css | append (resources.Get "css/knowledge-graph/override.css") -}}
+	{{- $bundle := $css | resources.Concat "css/knowledge-graph/widget.css" | minify | fingerprint -}}
+	<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+{{- end -}}
+
 
 <div
 	id="kgw-root"
