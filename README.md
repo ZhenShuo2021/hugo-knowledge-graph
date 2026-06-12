@@ -1,7 +1,5 @@
 # Hugo Knowledge Graph
 
-Visualize the relational links between your blog posts!
-
 Hugo Knowledge Graph (HKG) is a Hugo module for visualizing the link relationships between blog posts.
 
 | Example rendered using docker docs | Legend on |
@@ -10,7 +8,7 @@ Hugo Knowledge Graph (HKG) is a Hugo module for visualizing the link relationshi
 
 ## How it Works
 
-By configuring custom Hugo output formats, HKG indexes a JSON dictionary before the site build starts. During the build process, it uses this dictionary with [force-graph][fg] to render the relational links between posts. HKG builds connections in two ways:
+By configuring custom Hugo output formats, HKG indexes a JSON dictionary recording article relationships before the site build begins. It then uses this dictionary to render the interconnected relationships between articles using [force-graph][fg]. HKG establishes connections in two ways:
 
 1. **backlinks:** Records index entries on the linked page via Markdown links
 2. **tags:** Hugo tag system

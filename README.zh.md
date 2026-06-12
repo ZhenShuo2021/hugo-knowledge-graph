@@ -1,7 +1,5 @@
 # Hugo Knowledge Graph
 
-視覺化你的部落格文章關係連結！
-
 Hugo Knowledge Graph (HKG) 是一個 Hugo module，用來視覺化部落格文章之間的連結關係。
 
 | 使用 docker docs 的範例 | Legend on |
@@ -10,7 +8,7 @@ Hugo Knowledge Graph (HKG) 是一個 Hugo module，用來視覺化部落格文�
 
 ## How it Works
 
-透過設定自定義 Hugo 檔案輸出類型，HKG 在網站開始建立之前先索引好 JSON 字典，藉由這個字典在網站建立時使用 [force-graph][fg] 畫出文章之間的關係連結。HKG 使用兩種方式來建立連結：
+透過設定自定義 Hugo 檔案輸出類型，HKG 在網站開始建立之前先索引好記錄文章關係的 JSON 字典，並藉由這個字典使用 [force-graph][fg] 畫出文章之間的關係連結。HKG 使用兩種方式來建立連結：
 
 1. **backlinks:** 透過 Markdown 連結在被連結的頁面建立索引記錄
 2. **tags:** Hugo 標籤系統
