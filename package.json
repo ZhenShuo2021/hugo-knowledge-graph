@@ -28,7 +28,7 @@
 		"prettier": "~3.7.4",
 		"prettier-plugin-go-template": "^0.0.15",
 		"prettier-plugin-tailwindcss": "^0.7.2",
-		"rumdl": "^0.1.74"
+		"rumdl": "^0.2.20"
 	},
 	"devDependencies": {
 		"husky": "^9.1.7"
