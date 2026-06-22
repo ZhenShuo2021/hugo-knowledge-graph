@@ -163,22 +163,15 @@ widget:
 
 `.Page.GetPage` 初次看到可能不容易理解，重要原則是「永遠使用包含檔案名稱的路徑」。
 
-這能讓您非常直觀易懂的看出到底有沒有成功解析，如果有成功解析就會顯示正確 URL，否則 URL 會被渲染成包含檔案名稱的路徑；如果不包含檔案名稱，您可能會難以分辨渲染結果路徑是被被 fallback 成字串還是成功解析。檔案名稱方式又分成絕對路徑或相對路徑，一般一律建議使用絕對路徑，也就是說：
-
-```markdown
-[連結文字](/posts/my-article.md)
-<!-- 絕對路徑必須包含 leading slash "/" -->
-```
-
-絕對路徑從 `content` 往下算，不需要包含 `/content`。
-
-### 自動補全連結
-
-絕對路徑是從 `content` 往下算，因此造成 VS Code 無法自動補全連結，為此可以安裝 [Markdown-Absolute-Path][md-abs-path] 擴充功能，這是一個輕量的 VS Code 擴充功能，唯一的功能就是自定義絕對連結的起點。
+這能讓您非常直觀易懂的看出到底有沒有成功解析，如果有成功解析就會顯示正確 URL，否則 URL 會被渲染成包含檔案名稱的路徑；如果不包含檔案名稱，您可能會難以分辨渲染結果路徑是被被 fallback 成字串還是成功解析。
 
 ### 檢查死連結
 
-您可以使用 rumdl 檢查連結正確性，[MD057][md057] 規則可檢查絕對連結正確性。
+您可以使用 rumdl 的 [MD057][md057] 規則檢查連結正確性。
+
+### 自動補全連結
+
+絕對路徑是從 `content` 往下算，因此 VS Code 無法自動補全連結，可以在 `.vscode/settings.json` 中設定 [rumdl.linkCompletions.contentRoots][md-root] 規則解決此問題。
 
 ### 節點之間沒有連線
 
@@ -238,7 +231,7 @@ HKG 支援 dark mode，如果你的網站沒有在支援的覆蓋範圍，可以
 [fg]: https://github.com/vasturiano/force-graph
 [css]: https://github.com/ZhenShuo2021/hugo-knowledge-graph/blob/main/assets/css/knowledge-graph/vars.css
 [getpage]: https://gohugo.io/methods/page/getpage/
-[md-abs-path]: https://marketplace.visualstudio.com/items?itemName=ZhenShuo2021.markdown-absolute-path
+[md-root]: https://github.com/rvben/rumdl-vscode
 [md057]: https://rumdl.dev/md057/?h=md057#absolute-links
 [hugo-section]: https://gohugo.io/methods/page/section/
 [link-resolution]: https://gohugo.io/configuration/markup/#renderhookslinkuseembedded

@@ -163,22 +163,15 @@ widget:
 
 `.Page.GetPage` may not be easy to understand at first. The key principle is: “always use paths that include the filename.”
 
-This lets you clearly verify whether resolution succeeded. If it resolves successfully, it will render the correct URL; otherwise, the URL will render as a path containing the filename. If the filename is not included, it may be difficult to distinguish whether the rendered path is a fallback string or a successfully resolved path. Filename-based paths can be either absolute or relative, but absolute paths are generally recommended:
-
-```markdown
-[link text](/posts/my-article.md)
-<!-- Absolute paths must include a leading slash "/" -->
-```
-
-Absolute paths are calculated from `content`, so `/content` does not need to be included.
-
-### Auto-completing Links
-
-Since absolute paths are calculated from `content`, VS Code cannot auto-complete them. To address this, you can install the [Markdown-Absolute-Path][md-abs-path] extension, a lightweight VS Code extension whose sole purpose is to customize the root of absolute links.
+This lets you clearly verify whether resolution succeeded. If it resolves successfully, it will render the correct URL; otherwise, the URL will render as a path containing the filename. If the filename is not included, it may be difficult to distinguish whether the rendered path is a fallback string or a successfully resolved path.
 
 ### Checking Dead Links
 
-You can use rumdl to check link correctness. The [MD057][md057] rule verifies absolute links.
+You can use the [MD057][md057] rule in rumdl to verify the correctness of links.
+
+### Auto-completing Links
+
+Since absolute paths are calculated from `content`, VS Code cannot auto-complete them. To address this, you can set the [rumdl.linkCompletions.contentRoots][md-root] rule in `.vscode/settings.json`.
 
 ### No Connections Between Nodes
 
@@ -239,7 +232,7 @@ Switching to `always` will override your original theme’s link render hook (if
 [fg]: https://github.com/vasturiano/force-graph
 [css]: https://github.com/ZhenShuo2021/hugo-knowledge-graph/blob/main/assets/css/knowledge-graph/vars.css
 [getpage]: https://gohugo.io/methods/page/getpage/
-[md-abs-path]: https://marketplace.visualstudio.com/items?itemName=ZhenShuo2021.markdown-absolute-path
+[md-root]: https://github.com/rvben/rumdl-vscode
 [md057]: https://rumdl.dev/md057/?h=md057#absolute-links
 [hugo-section]: https://gohugo.io/methods/page/section/
 [link-resolution]: https://gohugo.io/configuration/markup/#renderhookslinkuseembedded
