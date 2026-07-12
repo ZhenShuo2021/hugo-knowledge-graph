@@ -1,6 +1,4 @@
-import { SHARED_PARAMS } from './constants.js';
-
-const { forceCollide, forceX, forceY, forceRadial } = await import(SHARED_PARAMS.d3ForceSrc);
+import { forceCollide, forceX, forceY, forceRadial } from './lib/d3-force/dist/d3-force';
 
 function collide(nodeVal, params) {
 	return forceCollide((node) => Math.sqrt(nodeVal(node)) * params.nodeRelSize + 12).strength(0.5);

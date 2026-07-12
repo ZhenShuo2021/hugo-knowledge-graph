@@ -95,13 +95,6 @@ HKG 提供兩種使用方式，分別是全功能的 `full` 和小組件類型�
 
 ```yaml
 # ==========================================
-# External Resources
-# ==========================================
-forceGraphSrc: https://cdn.jsdelivr.net/npm/force-graph@1.51.4/dist/force-graph.min.js
-forceGraphSri: sha256-EAhTm7nhcaDcNDRTNmRRobOm3tBgKO9Pl4YItli6LQo=
-d3ForceSrc: https://esm.sh/d3-force # Must be ESM format
-
-# ==========================================
 # Global Environment
 # ==========================================
 darkSelectors: '' # CSS selector to observe dark mode (used when no event is dispatched)

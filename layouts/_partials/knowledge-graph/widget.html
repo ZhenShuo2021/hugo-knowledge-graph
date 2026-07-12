@@ -26,12 +26,14 @@
 	<div id="kgw-wrap"></div>
 </div>
 
-{{- $forceGraphSrc := $g.forceGraphSrc | default "https://cdn.jsdelivr.net/npm/force-graph" -}}
-<script
-	defer
-	src="{{ $forceGraphSrc }}"
-	{{ with $g.forceGraphSri }}integrity="{{ . }}"{{ end }}
-	crossorigin="anonymous"></script>
-{{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g -}}
+{{- $forceGraph := resources.Get "js/knowledge-graph/lib/force-graph/dist/force-graph.min.js" | fingerprint -}}
+<script defer src="{{ $forceGraph.RelPermalink }}" integrity="{{ $forceGraph.Data.Integrity }}"></script>
+
+{{- $shims := dict
+  "d3-quadtree" "js/knowledge-graph/lib/d3-quadtree/dist/d3-quadtree.js"
+  "d3-dispatch" "js/knowledge-graph/lib/d3-dispatch/dist/d3-dispatch.js"
+  "d3-timer"    "js/knowledge-graph/lib/d3-timer/dist/d3-timer.js"
+-}}
+{{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g "shims" $shims -}}
 {{- $js := resources.Get "/js/knowledge-graph/main.js" | js.Build $opts | fingerprint -}}
 <script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

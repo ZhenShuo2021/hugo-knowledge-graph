@@ -21,14 +21,43 @@
 		"dev": "hugo server --source ../hugo-kg-example --themesDir ..",
 		"format": "prettier --write --list-different assets data i18n layouts scripts",
 		"format:md": "rumdl fmt --include \"**/*.md\"",
-		"prepare": "husky"
+		"prepare": "husky",
+		"postinstall": "vendor-copy"
 	},
+	"vendorCopy": [
+		{
+			"from": "node_modules/d3-dispatch/dist/d3-dispatch.js",
+			"to": "assets/js/knowledge-graph/lib/d3-dispatch/dist/d3-dispatch.js"
+		},
+		{
+			"from": "node_modules/d3-force/dist/d3-force.js",
+			"to": "assets/js/knowledge-graph/lib/d3-force/dist/d3-force.js"
+		},
+		{
+			"from": "node_modules/d3-quadtree/dist/d3-quadtree.js",
+			"to": "assets/js/knowledge-graph/lib/d3-quadtree/dist/d3-quadtree.js"
+		},
+		{
+			"from": "node_modules/d3-timer/dist/d3-timer.js",
+			"to": "assets/js/knowledge-graph/lib/d3-timer/dist/d3-timer.js"
+		},
+		{
+			"from": "node_modules/force-graph/dist/force-graph.min.js",
+			"to": "assets/js/knowledge-graph/lib/force-graph/dist/force-graph.min.js"
+		}
+	],
 	"dependencies": {
 		"@awmottaz/prettier-plugin-void-html": "^2.1.0",
+		"d3-dispatch": "^3.0.1",
+		"d3-force": "^3.0.0",
+		"d3-quadtree": "^3.0.1",
+		"d3-timer": "^3.0.1",
+		"force-graph": "^1.51.4",
 		"prettier": "~3.7.4",
 		"prettier-plugin-go-template": "^0.0.15",
 		"prettier-plugin-tailwindcss": "^0.7.2",
-		"rumdl": "^0.2.20"
+		"rumdl": "^0.2.20",
+		"vendor-copy": "^3.0.1"
 	},
 	"devDependencies": {
 		"husky": "^9.1.7"
