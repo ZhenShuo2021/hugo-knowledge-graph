@@ -175,11 +175,19 @@
 		box-shadow: 0 0 0 2px color-mix(in srgb, var(--kg-ring) 20%, transparent);
 	}
 
+	#kg-outer {
+		width: 100%;
+		position: relative;
+		flex: 1;
+		min-height: 0;
+	}
+
 	/* canvas */
 	#kg-wrap {
 		flex: 1;
 		position: relative;
 		overflow: clip;
+		height:100%;
 		max-height: calc(80vh - 4rem);
 		border: 0.5px solid var(--kg-border);
 		border-radius: var(--kg-radius-lg);
