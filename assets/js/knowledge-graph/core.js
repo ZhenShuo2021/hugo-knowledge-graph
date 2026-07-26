@@ -13,8 +13,14 @@ import { setupInfoCard, setupLegend, setupSearch, setupResize } from './render-u
 import { lerpColor } from './utils.js';
 const $ = (id) => document.getElementById(id);
 
-// params  — graph or widget params (from FULL_GRAPH_PARAMS / WIDGET_PARAMS)
-// params_shared — shared params (from SHARED_PARAMS)
+const graphDataPromise = (() => {
+	const ref = $('kg-root') ?? document.querySelector('[id^="kgw-root"]');
+	if (!ref) return Promise.resolve(null);
+	const baseURL = (ref.getAttribute('data-url') || '').replace(/\/?$/, '/');
+	const hash = ref.getAttribute('data-hash') || '';
+	return fetch(`${baseURL}knowledge-graph.json?v=${hash}`).then((r) => r.json());
+})();
+
 export async function initGraph(params, params_shared, config = {}) {
 	const rootEl = config.rootEl ?? $('kg-root');
 	const wrapId = config.wrapId ?? 'kg-wrap';
@@ -25,9 +31,8 @@ export async function initGraph(params, params_shared, config = {}) {
 
 	let data;
 	try {
-		const baseURL = (rootEl.getAttribute('data-url') || '').replace(/\/?$/, '/');
-		const hash = rootEl.getAttribute('data-hash') || '';
-		data = await fetch(`${baseURL}knowledge-graph.json?v=${hash}`).then((r) => r.json());
+		data = await graphDataPromise;
+		if (!data) throw new Error();
 	} catch {
 		rootEl.querySelector('#' + wrapId).textContent = 'Failed to load knowledge-graph.json';
 		return;

@@ -36,24 +36,46 @@ function whenIdle(fn, timeout = 3000) {
 	}
 }
 
+function whenNearViewport(el, onEnter) {
+	if (!('IntersectionObserver' in window)) {
+		onEnter();
+		return;
+	}
+	const margin = `${Math.round(window.innerHeight * 1.5)}px 0px`;
+	const io = new IntersectionObserver(
+		(entries) => {
+			if (entries.some((e) => e.isIntersecting)) {
+				io.disconnect();
+				onEnter();
+			}
+		},
+		{ rootMargin: margin, threshold: 0 },
+	);
+	io.observe(el);
+}
+
 whenIdle(() => {
 	if (document.getElementById('kg-root')) {
 		initGraph(FULL_GRAPH_PARAMS, SHARED_PARAMS);
 	}
+});
 
-	document.querySelectorAll('[id^="kgw-root"]').forEach((rootEl) => {
-		const focalId = rootEl.dataset.focal ?? '';
-		initGraph(WIDGET_PARAMS, SHARED_PARAMS, {
-			rootEl,
-			wrapId: 'kgw-wrap',
-			showLayoutSwitcher: false,
-			showSearch: false,
-			showInfoCard: false,
-			defaultLayout: 'uniform',
-			filterNodes: focalId ? buildHopFilter(focalId, WIDGET_PARAMS.hopDepth) : null,
-			onNodeClick: (node) => {
-				if (node?.url) window.location.href = node.url;
-			},
+document.querySelectorAll('[id^="kgw-root"]').forEach((rootEl) => {
+	whenNearViewport(rootEl, () => {
+		whenIdle(() => {
+			const focalId = rootEl.dataset.focal ?? '';
+			initGraph(WIDGET_PARAMS, SHARED_PARAMS, {
+				rootEl,
+				wrapId: 'kgw-wrap',
+				showLayoutSwitcher: false,
+				showSearch: false,
+				showInfoCard: false,
+				defaultLayout: 'uniform',
+				filterNodes: focalId ? buildHopFilter(focalId, WIDGET_PARAMS.hopDepth) : null,
+				onNodeClick: (node) => {
+					if (node?.url) window.location.href = node.url;
+				},
+			});
 		});
 	});
 });
