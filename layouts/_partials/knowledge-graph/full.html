@@ -1,12 +1,11 @@
-{{- partialCached "knowledge-graph/init.html" "foo" -}}
+{{- partialCached "knowledge-graph/init.html" "knowledge-graph/init.html" -}}
 {{- $g := site.Store.Get "knowledge-graph-config" -}}
-{{- if not site.Params.__hkg_CSSLoaded -}}
-	{{- $css := slice -}}
-	{{- $css = $css | append (resources.Get "css/knowledge-graph/vars.css") -}}
-	{{- $css = $css | append (resources.Get "css/knowledge-graph/full.css") -}}
-	{{- $css = $css | append (resources.Get "css/knowledge-graph/override.css") -}}
-	{{- $bundle := $css | resources.Concat "css/knowledge-graph/main.css" | minify | fingerprint -}}
-	<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+
+{{- /* load resources unless it's explicitly set to false */ -}}
+{{- /* site.Params is intended for upstream themes to merge config params for downstream users */ -}}
+{{- if or (eq $g.autoInjectCSS false) (eq site.Params.hkg.autoInjectCSS false) -}}
+{{- else -}}
+	{{- partial "knowledge-graph/assets-css.html" (dict "page" . "full" true) -}}
 {{- end -}}
 
 {{- $hash := site.Store.Get "knowledge-graph-hash" -}}
@@ -41,19 +40,7 @@
 	</div>
 </div>
 
-{{- $forceGraph := resources.Get "js/knowledge-graph/lib/force-graph/dist/force-graph.min.js" | fingerprint -}}
-<script defer src="{{ $forceGraph.RelPermalink }}" integrity="{{ $forceGraph.Data.Integrity }}"></script>
-
-{{- /* Read from data directory because:
-	1. hugo.yaml triggers a full site rebuild
-	2. hugo lowercases all config keys
-	3. see https://discourse.gohugo.io/t/56922/13 and https://discourse.gohugo.io/t/15828/3
-*/}}
-{{- $shims := dict
-  "d3-quadtree" "js/knowledge-graph/lib/d3-quadtree/dist/d3-quadtree.js"
-  "d3-dispatch" "js/knowledge-graph/lib/d3-dispatch/dist/d3-dispatch.js"
-  "d3-timer"    "js/knowledge-graph/lib/d3-timer/dist/d3-timer.js"
--}}
-{{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g "shims" $shims -}}
-{{- $js := resources.Get "/js/knowledge-graph/main.js" | js.Build $opts | fingerprint -}}
-<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{- if or (eq $g.autoInjectJS false) (eq site.Params.hkg.autoInjectJS false) -}}
+{{- else -}}
+	{{- partial "knowledge-graph/assets-js.html" . -}}
+{{- end -}}

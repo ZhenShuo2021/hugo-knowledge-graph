@@ -1,0 +1,17 @@
+{{- /* Read from data directory because:
+	1. hugo.yaml triggers a full site rebuild
+	2. hugo lowercases all config keys
+	3. see https://discourse.gohugo.io/t/56922/13 and https://discourse.gohugo.io/t/15828/3
+*/}}
+{{- partialCached "knowledge-graph/init.html" "knowledge-graph/init.html" -}}
+{{- $g := site.Store.Get "knowledge-graph-config" -}}
+{{- $forceGraph := resources.Get "js/knowledge-graph/lib/force-graph/dist/force-graph.min.js" | fingerprint -}}
+<script defer src="{{ $forceGraph.RelPermalink }}" integrity="{{ $forceGraph.Data.Integrity }}"></script>
+{{- $shims := dict
+	"d3-quadtree" "js/knowledge-graph/lib/d3-quadtree/dist/d3-quadtree.js"
+	"d3-dispatch" "js/knowledge-graph/lib/d3-dispatch/dist/d3-dispatch.js"
+	"d3-timer"    "js/knowledge-graph/lib/d3-timer/dist/d3-timer.js"
+-}}
+{{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g "shims" $shims -}}
+{{- $js := resources.Get "/js/knowledge-graph/main.js" | js.Build $opts | fingerprint -}}
+<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

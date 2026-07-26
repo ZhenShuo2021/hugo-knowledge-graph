@@ -1,0 +1,19 @@
+{{- $page := .page -}}
+{{- $full := .full | default false -}}
+{{- $widget := .widget | default false -}}
+{{- $css := slice -}}
+{{- $file := "" }}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/vars.css") -}}
+{{- if $full -}}
+	{{- $css = $css | append (resources.Get "css/knowledge-graph/full.css") -}}
+	{{- $file = "css/knowledge-graph/full.css" }}
+{{- else if $widget -}}
+	{{- $css = $css | append (resources.Get "css/knowledge-graph/widget.css") -}}
+	{{- $file = "css/knowledge-graph/widget.css" }}
+{{- else -}}
+	{{- errorf "hugo-knowledge-graph: missing input: either 'full' or 'widget' must be provided" -}}
+{{- end -}}
+{{- $css = $css | append (resources.Get "css/knowledge-graph/override.css") -}}
+
+{{- $bundle := resources.Concat $file $css | minify | fingerprint -}}
+<link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
