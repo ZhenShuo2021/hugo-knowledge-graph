@@ -91,4 +91,5 @@
 {{- end -}}
 
 {{- print `]}` -}}
-{{- site.Store.Set "knowledge-graph-hash" now.UnixNano -}}
+{{- $hashSrc := printf "%v || %v || %v || %v || %v" $backlinks $pages $totalPages $threshold site.Taxonomies.tags }}
+{{- site.Store.Set "knowledge-graph-hash" (hash.XxHash $hashSrc) -}}
