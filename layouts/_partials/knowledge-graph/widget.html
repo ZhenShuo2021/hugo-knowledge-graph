@@ -9,16 +9,7 @@
 	{{- partial "knowledge-graph/assets-css.html" (dict "page" . "widget" true) -}}
 {{- end -}}
 
-{{- $hash := site.Store.Get "knowledge-graph-hash" -}}
-<div
-	id="kgw-root"
-	class="kg-widget"
-	data-url="{{ .Site.Home.RelPermalink }}"
-	data-hash="{{ $hash }}"
-	data-focal="{{ .RelPermalink }}"
-	data-related-label="{{ i18n `kg.related_articles` }}">
-	<div id="kgw-wrap"></div>
-</div>
+{{- partial "knowledge-graph/widget-skeleton.html" . -}}
 
 {{- if or (eq $g.autoInjectJS false) (eq site.Params.hkg.autoInjectJS false) -}}
 {{- else -}}

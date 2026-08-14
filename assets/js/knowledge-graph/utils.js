@@ -33,3 +33,29 @@ export function truncateLabel(title, maxChars) {
 	if (!title) return '';
 	return title.length > maxChars ? title.slice(0, maxChars) + '…' : title;
 }
+
+export function whenIdle(fn, timeout = 3000) {
+	if ('requestIdleCallback' in window) {
+		requestIdleCallback(fn, { timeout });
+	} else {
+		setTimeout(fn, timeout);
+	}
+}
+
+export function whenNearViewport(el, onEnter) {
+	if (!('IntersectionObserver' in window)) {
+		onEnter();
+		return;
+	}
+	const margin = `${Math.round(window.innerHeight * 1.5)}px 0px`;
+	const io = new IntersectionObserver(
+		(entries) => {
+			if (entries.some((e) => e.isIntersecting)) {
+				io.disconnect();
+				onEnter();
+			}
+		},
+		{ rootMargin: margin, threshold: 0 },
+	);
+	io.observe(el);
+}

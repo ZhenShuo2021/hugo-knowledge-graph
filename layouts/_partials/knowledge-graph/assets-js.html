@@ -13,5 +13,5 @@
 	"d3-timer"    "js/knowledge-graph/lib/d3-timer/dist/d3-timer.js"
 -}}
 {{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g "shims" $shims -}}
-{{- $js := resources.Get "/js/knowledge-graph/main.js" | js.Build $opts | fingerprint -}}
+{{- $js := resources.Get "/js/knowledge-graph/init-graph.js" | js.Build $opts | fingerprint -}}
 <script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

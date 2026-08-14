@@ -49,4 +49,6 @@ export function onDarkModeChange(callback, params) {
 		attributes: true,
 		attributeFilter: ['class', 'data-theme', 'data-scheme', 'data-color-mode'],
 	});
+
+	return observer;
 }

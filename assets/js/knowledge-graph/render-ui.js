@@ -131,7 +131,9 @@ export function setupSearch(nodes, Graph, state, params) {
 }
 
 export function setupResize(wrap, Graph) {
-	new ResizeObserver(() => {
+	const observer = new ResizeObserver(() => {
 		Graph.width(wrap.clientWidth).height(wrap.clientHeight);
-	}).observe(wrap);
+	});
+	observer.observe(wrap);
+	return observer;
 }

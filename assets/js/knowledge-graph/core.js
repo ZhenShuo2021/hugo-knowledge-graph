@@ -213,7 +213,7 @@ export async function initGraph(params, params_shared, config = {}) {
 
 	const { syncLegendColors } = setupLegend(rootEl, nodes, links, tagCount, Graph, state);
 	if (showSearch) setupSearch(nodes, Graph, state, params);
-	setupResize(wrap, Graph);
+	const resizeObserver = setupResize(wrap, Graph);
 
 	const nodeAtEvent = (e) => {
 		const rect = wrap.querySelector('canvas').getBoundingClientRect();
@@ -234,7 +234,7 @@ export async function initGraph(params, params_shared, config = {}) {
 		}
 	});
 
-	onDarkModeChange(() => {
+	const darkModeObserver = onDarkModeChange(() => {
 		syncPalette(groups);
 		syncLegendColors();
 		Graph.backgroundColor(PALETTE.canvasBg)
@@ -242,4 +242,13 @@ export async function initGraph(params, params_shared, config = {}) {
 			.linkColor(makeLinkColor(state))
 			.linkDirectionalArrowColor(makeArrowColor(state));
 	}, params_shared);
+
+	function destroy() {
+		Graph._destructor();
+		darkModeObserver.disconnect();
+		resizeObserver.disconnect();
+	}
+
+	const instance = { Graph, destroy };
+	return instance;
 }

@@ -1,0 +1,32 @@
+{{- $g := site.Store.Get "knowledge-graph-config" -}}
+{{- $hash := site.Store.Get "knowledge-graph-hash" -}}
+<div
+	id="kg-root"
+	class="kg-root"
+	data-url="{{ .Site.Home.RelPermalink }}"
+	data-hash="{{ $hash }}"
+	data-related-label="{{ i18n `kg.related_articles` }}">
+	<div id="kg-controls">
+		{{- if (eq $g.full.fixedLayout "") -}}
+			<div id="kg-layout-switcher">
+				<button data-layout="uniform">Uniform</button>
+				<button data-layout="layered">Layered</button>
+				<button data-layout="organic">Organic</button>
+			</div>
+		{{- end -}}
+		<div id="kg-legend" class="kg-legend"></div>
+		<div id="kg-search-wrap">
+			<input type="text" id="kg-search" placeholder="Search…" autocomplete="off">
+			<button id="kg-search-clear" aria-label="Clear search">✕</button>
+		</div>
+	</div>
+	<div id="kg-outer">
+		<div id="kg-wrap"></div>
+		<div id="kg-info">
+			<div class="ki-title" id="ki-title"></div>
+			<div class="ki-meta" id="ki-meta"></div>
+			<div class="ki-tags" id="ki-tags"></div>
+			<div id="ki-related"></div>
+		</div>
+	</div>
+</div>
