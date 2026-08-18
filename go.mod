@@ -1,3 +1,3 @@
 module github.com/ZhenShuo2021/hugo-knowledge-graph
 
-go 1.25
+go 1.20
