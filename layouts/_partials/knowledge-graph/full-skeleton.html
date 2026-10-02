@@ -1,10 +1,19 @@
 {{- $g := site.Store.Get "knowledge-graph-config" -}}
 {{- $hash := site.Store.Get "knowledge-graph-hash" -}}
+{{- $jsonURL := printf "%s%s%s" .Site.Home.RelPermalink "knowledge-graph.json?v=" $hash -}}
+
+{{- /* Only preload in full mode because this page has only a graph. */ -}}
+<link
+	rel="preload"
+	as="fetch"
+	type="application/json"
+	href="{{ $jsonURL }}"
+	fetchpriority="high"
+	crossorigin>
 <div
 	id="kg-root"
 	class="kg-root"
-	data-url="{{ .Site.Home.RelPermalink }}"
-	data-hash="{{ $hash }}"
+	data-src="{{ $jsonURL }}"
 	data-related-label="{{ i18n `kg.related_articles` }}">
 	<div id="kg-controls">
 		{{- if (eq $g.full.fixedLayout "") -}}

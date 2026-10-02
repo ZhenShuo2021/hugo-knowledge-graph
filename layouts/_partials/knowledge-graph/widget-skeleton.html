@@ -1,10 +1,10 @@
 {{- $g := site.Store.Get "knowledge-graph-config" -}}
 {{- $hash := site.Store.Get "knowledge-graph-hash" -}}
+{{- $jsonURL := printf "%s%s%s" .Site.Home.RelPermalink "knowledge-graph.json?v=" $hash -}}
 <div
 	id="kgw-root"
 	class="kg-widget"
-	data-url="{{ .Site.Home.RelPermalink }}"
-	data-hash="{{ $hash }}"
+	data-src="{{ $jsonURL }}"
 	data-focal="{{ .RelPermalink }}"
 	data-related-label="{{ i18n `kg.related_articles` }}">
 	<div id="kgw-wrap"></div>

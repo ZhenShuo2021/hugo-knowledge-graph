@@ -14,12 +14,10 @@ import { lerpColor } from './utils.js';
 const $ = (id) => document.getElementById(id);
 
 const graphDataPromise = (() => {
-	const ref = $('kg-root') ?? document.querySelector('[id^="kgw-root"]');
-	if (!ref) return Promise.resolve(null);
-	const baseURL = (ref.getAttribute('data-url') || '').replace(/\/?$/, '/');
-	const hash = ref.getAttribute('data-hash') || '';
-	return fetch(`${baseURL}knowledge-graph.json?v=${hash}`).then((r) => r.json());
-})();
+	const ref = document.getElementById('kg-root') ?? document.getElementById('kgw-root')
+	if (!ref) return Promise.resolve(null)
+	return fetch(ref.getAttribute('data-src')).then((r) => r.json())
+})()
 
 export async function initGraph(params, params_shared, config = {}) {
 	const rootEl = config.rootEl ?? $('kg-root');
