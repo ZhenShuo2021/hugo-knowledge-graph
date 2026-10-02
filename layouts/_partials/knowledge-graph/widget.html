@@ -1,17 +1,35 @@
-{{- if in (slice "section" "taxonomy" "term") .Kind -}}
-	{{- warnf "knowledge-graph/widget.html is not supported in %s page" .Kind -}}
+{{- /* Renders the knowledge graph widget: styles, skeleton and scripts.
+
+	Usage:
+		Load immediately (default)
+			{{ partial "knowledge-graph/widget.html" . }}
+
+		Loads scripts when near viewport
+			{{ partial "knowledge-graph/widget.html" (dict "page" .Page "lazy" true) }}
+
+	@param page {PAGE.Page}: The Page object.
+	@param lazy {bool}: Loads scripts when near viewport. Defaults to false.
+*/ -}}
+{{- $page := . -}}
+{{- $lazy := false -}}
+{{- if reflect.IsMap . -}}
+	{{- $page = .page -}}
+	{{- $lazy = .lazy | default false -}}
+{{- end -}}
+{{- if in (slice "section" "taxonomy" "term") $page.Kind -}}
+	{{- warnf "knowledge-graph/widget.html is not supported in %s page" $page.Kind -}}
 	{{- return -}}
 {{- end -}}
 {{- partialCached "knowledge-graph/init.html" "knowledge-graph/init.html" -}}
 {{- $g := site.Store.Get "knowledge-graph-config" -}}
 {{- if or (eq $g.autoInjectCSS false) (eq site.Params.hkg.autoInjectCSS false) -}}
 {{- else -}}
-	{{- partial "knowledge-graph/assets-css.html" (dict "page" . "widget" true) -}}
+	{{- partial "knowledge-graph/assets-css.html" (dict "page" $page "widget" true) -}}
 {{- end -}}
 
-{{- partial "knowledge-graph/widget-skeleton.html" . -}}
+{{- partial "knowledge-graph/widget-skeleton.html" $page -}}
 
 {{- if or (eq $g.autoInjectJS false) (eq site.Params.hkg.autoInjectJS false) -}}
 {{- else -}}
-	{{- partial "knowledge-graph/assets-js.html" . -}}
+	{{- partial "knowledge-graph/assets-js.html" (dict "lazy" $lazy) -}}
 {{- end -}}

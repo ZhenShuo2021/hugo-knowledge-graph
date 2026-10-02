@@ -71,6 +71,12 @@ For typical usage, creating `content/graph/_index.md` or setting `type: graph` i
 
 If you want to load HKG as a page widget, use `{{ partial "knowledge-graph/widget.html" . }}` in your desired partial file.
 
+By default the widget scripts load immediately. If the widget sits below the fold and needs scrolling to be seen, set `lazy` so the scripts are only downloaded when the widget is about to scroll into view and never compete with the page's own resources:
+
+```go-html-template
+{{ partial "knowledge-graph/widget.html" (dict "page" . "lazy" true) }}
+```
+
 ## Customization
 
 ### Styles
