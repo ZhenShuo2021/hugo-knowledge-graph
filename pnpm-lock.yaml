@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@awmottaz/prettier-plugin-void-html':
-        specifier: ^2.1.0
-        version: 2.1.0(prettier@3.7.4)
       d3-dispatch:
         specifier: ^3.0.1
         version: 3.0.1
@@ -29,9 +26,6 @@ importers:
       prettier:
         specifier: ~3.7.4
         version: 3.7.4
-      prettier-plugin-go-template:
-        specifier: ^0.0.15
-        version: 0.0.15(prettier@3.7.4)
       prettier-plugin-tailwindcss:
         specifier: ^0.7.2
         version: 0.7.2(prettier@3.7.4)
@@ -42,16 +36,30 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
     devDependencies:
+      '@ZhenShuo2021/prettier-plugin-go-template':
+        specifier: github:ZhenShuo2021/prettier-plugin-go-template#v0.0.3
+        version: https://codeload.github.com/ZhenShuo2021/prettier-plugin-go-template/tar.gz/7e09494dd48c32bdd358310975706ee758493900(prettier@3.7.4)
+      '@awmottaz/prettier-plugin-void-html':
+        specifier: ^2.3.0
+        version: 2.3.0(prettier@3.7.4)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
 
 packages:
 
-  '@awmottaz/prettier-plugin-void-html@2.1.0':
-    resolution: {integrity: sha512-csoLknjo0lcqkhlsp3qg0jLSmQnow1sLwJTt3oAQmUyIbBtIXVUX1TBk+ay6HvphsUtkWGW8lyAcr/3I4gRJQQ==}
+  '@ZhenShuo2021/prettier-plugin-go-template@https://codeload.github.com/ZhenShuo2021/prettier-plugin-go-template/tar.gz/7e09494dd48c32bdd358310975706ee758493900':
+    resolution: {gitHosted: true, integrity: sha512-jN++3ENsFl1RvQflmVIfPlFYNuPIVv+HjZE4JJ+9U7IIpu7QvWh1aL5nofxWfJ0G4hhoD0+qB+39qJganhy+GA==, tarball: https://codeload.github.com/ZhenShuo2021/prettier-plugin-go-template/tar.gz/7e09494dd48c32bdd358310975706ee758493900}
+    version: 0.0.3
+    engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
-      prettier: 3.0.0 - 3.8.x
+      prettier: ^3.0.0
+
+  '@awmottaz/prettier-plugin-void-html@2.3.0':
+    resolution: {integrity: sha512-S/imL3kuOuZf2VH1D8GKbIzRSxb5ouem2dFDgtanulkXQ2SQ0yC8bydil77/xsdfEVdUTGJ7AhWGUYruzQJ0Xw==}
+    engines: {node: 22 || 24 || 26}
+    peerDependencies:
+      prettier: 3.0.0 - 3.9.x
 
   '@rumdl/cli-darwin-arm64@0.2.20':
     resolution: {integrity: sha512-/B8XiJurw01r44JrRVi6lQKq9jMOYA/YHPfT535+1/owwikec3K6OSXb2bya1ByuKVDcQ7tF551Rpj+Z2RpJxw==}
@@ -233,12 +241,6 @@ packages:
       preact-render-to-string:
         optional: true
 
-  prettier-plugin-go-template@0.0.15:
-    resolution: {integrity: sha512-WqU92E1NokWYNZ9mLE6ijoRg6LtIGdLMePt2C7UBDjXeDH9okcRI3zRqtnWR4s5AloiqyvZ66jNBAa9tmRY5EQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      prettier: ^3.0.0
-
   prettier-plugin-tailwindcss@0.7.2:
     resolution: {integrity: sha512-LkphyK3Fw+q2HdMOoiEHWf93fNtYJwfamoKPl7UwtjFQdei/iIBoX11G6j706FzN3ymX9mPVi97qIY8328vdnA==}
     engines: {node: '>=20.19'}
@@ -307,8 +309,8 @@ packages:
   tinycolor2@1.6.0:
     resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
 
-  ulid@2.4.0:
-    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
+  ulid@3.0.2:
+    resolution: {integrity: sha512-yu26mwteFYzBAot7KVMqFGCVpsF6g8wXfJzQUHvu1no3+rRRSFcSV2nKeYvNPLD2J4b08jYBDhHUjeH0ygIl9w==}
     hasBin: true
 
   vendor-copy@3.0.1:
@@ -318,7 +320,12 @@ packages:
 
 snapshots:
 
-  '@awmottaz/prettier-plugin-void-html@2.1.0(prettier@3.7.4)':
+  '@ZhenShuo2021/prettier-plugin-go-template@https://codeload.github.com/ZhenShuo2021/prettier-plugin-go-template/tar.gz/7e09494dd48c32bdd358310975706ee758493900(prettier@3.7.4)':
+    dependencies:
+      prettier: 3.7.4
+      ulid: 3.0.2
+
+  '@awmottaz/prettier-plugin-void-html@2.3.0(prettier@3.7.4)':
     dependencies:
       prettier: 3.7.4
 
@@ -480,11 +487,6 @@ snapshots:
 
   preact@10.29.7: {}
 
-  prettier-plugin-go-template@0.0.15(prettier@3.7.4):
-    dependencies:
-      prettier: 3.7.4
-      ulid: 2.4.0
-
   prettier-plugin-tailwindcss@0.7.2(prettier@3.7.4):
     dependencies:
       prettier: 3.7.4
@@ -503,7 +505,7 @@ snapshots:
 
   tinycolor2@1.6.0: {}
 
-  ulid@2.4.0: {}
+  ulid@3.0.2: {}
 
   vendor-copy@3.0.1:
     dependencies:
