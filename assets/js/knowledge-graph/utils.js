@@ -47,7 +47,6 @@ export function whenNearViewport(el, onEnter) {
 		onEnter();
 		return;
 	}
-	const margin = `${Math.round(window.innerHeight * 1.5)}px 0px`;
 	const io = new IntersectionObserver(
 		(entries) => {
 			if (entries.some((e) => e.isIntersecting)) {
@@ -55,7 +54,7 @@ export function whenNearViewport(el, onEnter) {
 				onEnter();
 			}
 		},
-		{ rootMargin: margin, threshold: 0 },
+		{ rootMargin: '150% 0px', threshold: 0 },
 	);
 	io.observe(el);
 }
