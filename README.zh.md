@@ -71,6 +71,41 @@ HKG 提供兩種使用方式，分別是全功能的 `full` 和小組件類型�
 
 如果你想以頁面小組件的方式載入 HKG，則在您想要的 partial 檔案使用 `{{ partial "knowledge-graph/widget.html" . }}`。
 
+預設情況下 widget 的腳本會立即載入。如果 widget 位於頁面下方、需要捲動才看得到，可設定 `lazy`，腳本只會在 widget 即將捲入視窗時才下載，不會和頁面本身的資源競爭：
+
+```go-html-template
+{{ partial "knowledge-graph/widget.html" (dict "page" . "lazy" true) }}
+```
+
+### AJAX 換頁
+
+使用 JavaScript 換頁的網站（pjax、Swup、Turbo、前端路由）:
+
+1. 請在套件的 hook 中呼叫 `window.__HKG` 的入口
+2. 舊內容移除前呼叫 `destroy`，新內容寫入 DOM 後呼叫 `init`
+3. `scope` 為選填，預設是 `document`。
+
+```javascript
+// Swup
+swup.hooks.before('content:replace', () => window.__HKG?.destroy());
+swup.hooks.on('content:replace', () => window.__HKG?.init());
+```
+
+如果自行使用 JavaScript `import()` 載入腳本，可以用兩種方式取得 URL：
+
+```go-html-template
+{{ $kg := hugo.Store.Get "knowledge-graph-urls" }}
+{{ $kg.lib }} {{ $kg.app }}
+```
+
+或在執行時從 script 標籤讀取：
+
+```javascript
+const { kgLib, kgApp } = document.querySelector('script[data-kg-app]').dataset;
+```
+
+Hugo Store 的值要在 `knowledge-graph/assets-js.html` 渲染之後才會存在，請在其後讀取。
+
 ## Customization
 
 ### Styles

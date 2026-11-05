@@ -77,6 +77,36 @@ By default the widget scripts load immediately. If the widget sits below the fol
 {{ partial "knowledge-graph/widget.html" (dict "page" . "lazy" true) }}
 ```
 
+### AJAX Navigation
+
+For sites that swap pages with JavaScript (pjax, Swup, Turbo, client-side routers):
+
+1. Call the entry points on `window.__HKG` from your library's hooks.
+2. Call `destroy` before the old content is removed and `init` after the new content is in the DOM.
+3. `scope` is optional and defaults to `document`.
+
+```javascript
+// Swup
+swup.hooks.before('content:replace', () => window.__HKG?.destroy());
+swup.hooks.on('content:replace', () => window.__HKG?.init());
+```
+
+If you load the scripts yourself with JavaScript `import()`, the URLs are available in two ways:
+
+```go-html-template
+{{ $kg := hugo.Store.Get "knowledge-graph-urls" }}
+{{ print $kg.lib }}
+{{ print $kg.app }}
+```
+
+Or from the script tag at runtime:
+
+```javascript
+const { kgLib, kgApp } = document.querySelector('script[data-kg-app]').dataset;
+```
+
+The Hugo Store value is only set after `knowledge-graph/assets-js.html` has rendered, so read it afterwards.
+
 ## Customization
 
 ### Styles

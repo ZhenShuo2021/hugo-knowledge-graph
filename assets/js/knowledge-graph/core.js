@@ -13,11 +13,10 @@ import { setupInfoCard, setupLegend, setupSearch, setupResize } from './render-u
 import { lerpColor } from './utils.js';
 const $ = (id) => document.getElementById(id);
 
-const graphDataPromise = (() => {
-	const ref = document.getElementById('kg-root') ?? document.getElementById('kgw-root')
-	if (!ref) return Promise.resolve(null)
-	return fetch(ref.getAttribute('data-src')).then((r) => r.json())
-})()
+const loadData = (rootEl) => {
+	const src = rootEl.getAttribute('data-src');
+	return src ? fetch(src).then((r) => r.json()) : Promise.resolve(null);
+};
 
 export async function initGraph(params, params_shared, config = {}) {
 	const rootEl = config.rootEl ?? $('kg-root');
@@ -29,12 +28,13 @@ export async function initGraph(params, params_shared, config = {}) {
 
 	let data;
 	try {
-		data = await graphDataPromise;
+		data = await loadData(rootEl);
 		if (!data) throw new Error();
 	} catch {
 		rootEl.querySelector('#' + wrapId).textContent = 'Failed to load knowledge-graph.json';
 		return;
 	}
+	if (!rootEl.isConnected) return;
 
 	const rawNodes = data.nodes
 		.filter((d) => params.showTags || d.section !== 'tag')

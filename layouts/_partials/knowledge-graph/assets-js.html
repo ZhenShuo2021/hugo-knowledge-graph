@@ -32,6 +32,7 @@
 -}}
 {{- $opts := dict "format" "esm" "minify" hugo.IsProduction "params" $g "shims" $shims -}}
 {{- $js := resources.Get "/js/knowledge-graph/init-graph.js" | js.Build $opts | fingerprint -}}
+{{- hugo.Store.Set "knowledge-graph-urls" (dict "lib" $forceGraph.RelPermalink "app" $js.RelPermalink) -}}
 
 
 {{- if $lazy -}}
@@ -41,5 +42,5 @@
 	<script type="module" src="{{ $loader.RelPermalink }}" integrity="{{ $loader.Data.Integrity }}" data-kg-lib="{{ $forceGraph.RelPermalink }}" data-kg-app="{{ $js.RelPermalink }}"></script>
 {{- else -}}
 	<script defer src="{{ $forceGraph.RelPermalink }}" integrity="{{ $forceGraph.Data.Integrity }}"></script>
-	<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+	<script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" data-kg-lib="{{ $forceGraph.RelPermalink }}" data-kg-app="{{ $js.RelPermalink }}"></script>
 {{- end -}}
